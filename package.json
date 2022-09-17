@@ -2,7 +2,7 @@
   "name": "rest-client-api",
   "displayName": "REST Client Api",
   "description": "REST Client for Visual Studio Code",
-  "version": "0.25.0",
+  "version": "0.25.2",
   "publisher": "donebd",
   "author": {
     "name": "Daniil Bakin",

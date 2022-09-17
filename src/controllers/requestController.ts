@@ -100,7 +100,7 @@ export class RequestController {
             }
 
             try {
-                const activeColumn = ViewColumn.Active;
+                const activeColumn = ViewColumn.Beside;
                 const previewColumn = settings.previewColumn === ViewColumn.Active
                     ? activeColumn
                     : ((activeColumn as number) + 1) as ViewColumn;
