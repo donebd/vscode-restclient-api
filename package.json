@@ -1,12 +1,12 @@
 {
-  "name": "rest-client",
-  "displayName": "REST Client",
+  "name": "rest-client-api",
+  "displayName": "REST Client Api",
   "description": "REST Client for Visual Studio Code",
   "version": "0.25.0",
-  "publisher": "humao",
+  "publisher": "donebd",
   "author": {
-    "name": "Huachao Mao",
-    "email": "huachaomao@gmail.com"
+    "name": "Daniil Bakin",
+    "email": "dinil.bd@mail.ru"
   },
   "icon": "images/rest_icon.png",
   "galleryBanner": {
@@ -16,12 +16,12 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Huachao/vscode-restclient/issues",
-    "email": "huachaomao@gmail.com"
+    "email": "dinil.bd@mail.ru"
   },
-  "homepage": "https://github.com/Huachao/vscode-restclient/blob/master/README.md",
+  "homepage": "https://github.com/donebd/vscode-restclient-api/blob/master/README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Huachao/vscode-restclient.git"
+    "url": "https://github.com/donebd/vscode-restclient-api.git"
   },
   "engines": {
     "vscode": "^1.57.0"

@@ -80,6 +80,62 @@ export class Selector {
         };
     }
 
+    public static async getRequestFromDocument(document: TextDocument, range: Range | null = null): Promise<SelectedRequest | null> {
+        let selectedText: string | null;
+        if (range) {
+            const activeLine = range?.start.line ;
+            if (document.languageId === 'markdown') {
+                selectedText = null;
+
+                for (const r of Selector.getMarkdownRestSnippets(document)) {
+                    const snippetRange = new Range(r.start.line + 1, 0, r.end.line, 0);
+                    if (snippetRange.contains(new Position(activeLine, 0))) {
+                        selectedText = document.getText(snippetRange);
+                    }
+                }
+
+            } else {
+                selectedText = this.getDelimitedText(document.getText(), activeLine);
+            }
+        } else {
+            selectedText = document.getText();
+        }
+
+        if (selectedText === null) {
+            return null;
+        }
+
+        // convert request text into lines
+        const lines = selectedText.split(Constants.LineSplitterRegex);
+
+        // parse request metadata
+        const metadatas = this.parseReqMetadatas(lines);
+
+        // process #@prompt comment metadata
+        const promptVariablesDefinitions = this.parsePromptMetadataForVariableDefinitions(metadatas.get(RequestMetadata.Prompt));
+        const promptVariables = await this.promptForInput(promptVariablesDefinitions);
+        if (!promptVariables) {
+            return null;
+        }
+
+        // parse actual request lines
+        const rawLines = lines.filter(l => !this.isCommentLine(l));
+        const requestRange = this.getRequestRanges(rawLines)[0];
+        if (!requestRange) {
+            return null;
+        }
+
+        selectedText = rawLines.slice(requestRange[0], requestRange[1] + 1).join(EOL);
+
+        // variables replacement
+        selectedText = await VariableProcessor.processRawRequest(selectedText, promptVariables);
+
+        return {
+            text: selectedText,
+            metadatas: metadatas
+        };
+    }
+
     public static parseReqMetadatas(lines: string[]): Map<RequestMetadata, string | undefined> {
         const metadatas = new Map<RequestMetadata, string | undefined>();
         for (const line of lines) {
