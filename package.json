@@ -2,7 +2,7 @@
   "name": "rest-client-api",
   "displayName": "REST Client Api",
   "description": "REST Client for Visual Studio Code",
-  "version": "0.25.2",
+  "version": "0.25.3",
   "publisher": "donebd",
   "author": {
     "name": "Daniil Bakin",
@@ -39,7 +39,7 @@
     "multi-root ready"
   ],
   "activationEvents": [
-    "onCommand:rest-client.request",
+    "onCommand:rest-client-api.request",
     "onCommand:rest-client.history",
     "onCommand:rest-client.clear-history",
     "onCommand:rest-client.save-response",
@@ -90,7 +90,7 @@
     ],
     "commands": [
       {
-        "command": "rest-client.request",
+        "command": "rest-client-api.request",
         "title": "Send Request",
         "category": "Rest Client"
       },
@@ -242,7 +242,7 @@
       ],
       "editor/context": [
         {
-          "command": "rest-client.request",
+          "command": "rest-client-api.request",
           "when": "editorTextFocus && editorLangId == http",
           "group": "rest-client@1"
         },
@@ -260,13 +260,13 @@
     },
     "keybindings": [
       {
-        "command": "rest-client.request",
+        "command": "rest-client-api.request",
         "key": "ctrl+alt+r",
         "mac": "cmd+alt+r",
         "when": "editorTextFocus && editorLangId == 'http'"
       },
       {
-        "command": "rest-client.request",
+        "command": "rest-client-api.request",
         "key": "ctrl+alt+r",
         "mac": "cmd+alt+r",
         "when": "editorTextFocus && editorLangId == 'plaintext'"
@@ -354,7 +354,7 @@
           "scope": "resource",
           "description": "Show response in different tab"
         },
-        "rest-client.requestNameAsResponseTabTitle": {
+        "rest-client-api.requestNameAsResponseTabTitle": {
           "type": "boolean",
           "default": false,
           "scope": "resource",
