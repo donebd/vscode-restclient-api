@@ -100,14 +100,14 @@ export class RequestController {
             }
 
             try {
-                const activeColumn = window.activeTextEditor!.viewColumn;
+                const activeColumn = ViewColumn.Active;
                 const previewColumn = settings.previewColumn === ViewColumn.Active
                     ? activeColumn
                     : ((activeColumn as number) + 1) as ViewColumn;
                 if (settings.previewResponseInUntitledDocument) {
                     this._textDocumentView.render(response, previewColumn);
-                } else if (previewColumn) {
-                    this._webview.render(response, previewColumn);
+                } else { 
+                    this._webview.render(response, activeColumn);
                 }
             } catch (reason) {
                 Logger.error('Unable to preview response:', reason);
